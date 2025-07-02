@@ -1,0 +1,20 @@
+.nav-link-c{
+    height: 100%;
+    padding: 1rem;
+    min-width: 110px !important;
+    opacity: 0.8;
+}
+.nav-link-c:hover{
+    opacity: 1;
+}
+a{
+    text-decoration: none !important;
+    color: #000000;
+}
+.login-btn:hover{
+    background-color: #2a55e5 !important;
+}
+.login-option-head{
+    display: flex;
+    justify-content: space-between;
+}

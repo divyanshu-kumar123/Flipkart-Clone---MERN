@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import { Box, Button,  Paper, Typography } from "@mui/material";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import ViewInArOutlinedIcon from '@mui/icons-material/ViewInArOutlined';
+import StarsOutlinedIcon from '@mui/icons-material/StarsOutlined';
+
+import {Link} from 'react-router-dom'
+
+function LoginBtn() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Box
+      sx={{ position: "relative", display: "inline-block" }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <Link to="/login">
+      <Button
+        variant={open ? "contained" : "text"}
+        size="medium"
+        sx={{
+          color: !open && "black",
+          height: "3rem",
+          width: "7rem",
+          borderRadius: "10px",
+          transition: "all 0.5s ease-in-out",
+        }}
+        className=" login-btn"
+      >
+        <PermIdentityOutlinedIcon className="fs-2 pe-2" /> Login
+        {!open ? (
+          <KeyboardArrowDownOutlinedIcon />
+        ) : (
+          <KeyboardArrowUpOutlinedIcon />
+        )}
+      </Button>
+      </Link>
+
+      {open && (
+        <Paper
+          elevation={3}
+          sx={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            mt: 1,
+            p: 2,
+            zIndex: 1000,
+            width: "300px",
+            backgroundColor: "white",
+          }}
+        >
+        <div className="login-option">
+          <div className="login-option-head">
+            <span>New Customer?</span>
+            <span><Link to="/" className="text-primary fw-bold">Sign Up</Link></span>
+          </div>
+          <hr />
+          <p><Link to="/" className="pt-1 pb-1"><PermIdentityOutlinedIcon className="pe-2"/> My profile</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><AddCircleOutlineOutlinedIcon className="pe-2"/>Flipkart Plus Zone</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><ViewInArOutlinedIcon className="pe-2"/>Orders</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><i class="fa-regular fa-heart pe-2"></i>Wishlist</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><StarsOutlinedIcon className="pe-2" />Rewards</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><i class="fa-regular fa-credit-card pe-2"></i>Gift cards</Link></p>
+
+        </div>
+
+        </Paper>
+      )}
+    </Box>
+  );
+}
+
+export default LoginBtn;
