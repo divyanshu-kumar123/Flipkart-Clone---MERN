@@ -4,7 +4,7 @@ import Navbar from '../Components/Navbar'
 function Homepage() {
   return (
     <>
-        <Navbar />
+        Homepage
     </>
   )
 }

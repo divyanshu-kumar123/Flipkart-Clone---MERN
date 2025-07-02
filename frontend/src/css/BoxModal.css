@@ -1,0 +1,16 @@
+.box-modal{
+    width: 800px;
+    min-height: 530px;
+}
+
+.box-modal-left{
+    background-color: #2874f0 !important;
+    padding: 2rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.box-modal-right{
+    background-color: white;
+}

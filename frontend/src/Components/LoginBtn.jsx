@@ -56,7 +56,7 @@ function LoginBtn() {
         <div className="login-option">
           <div className="login-option-head">
             <span>New Customer?</span>
-            <span><Link to="/" className="text-primary fw-bold">Sign Up</Link></span>
+            <span><Link to="/signup" className="text-primary fw-bold">Sign Up</Link></span>
           </div>
           <hr />
           <p><Link to="/" className="pt-1 pb-1"><PermIdentityOutlinedIcon className="pe-2"/> My profile</Link></p>

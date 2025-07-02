@@ -1,0 +1,14 @@
+.tnc-para{
+    font-size: 0.75rem;
+    color: gray;
+}
+.comp{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.bottom center a{
+    font-size: 0.9rem;
+    font-weight: 600;
+}
