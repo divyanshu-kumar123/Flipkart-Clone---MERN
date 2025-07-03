@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const CATEGORY_OPTIONS = ["Trending", "Room", "IconicCity", "Mountains", "Castles", "AmazingPools", "Camping", "Farms", "Arctic", "Domes", "HouseBoats"]; 
+const CATEGORY_OPTIONS = ["Trending", "grocery", "mobile", "faishon", "electronics", "homeNfurniture", "appliances", "dress", "shoes", "manWears", "womenWear"]; 
 
 
 //Schema for the product
@@ -21,6 +21,6 @@ const productSchema = new Schema({
 })
 
 //Product Model
-const Product = new mongoose.Model("Product", productSchema);
+const Product = new mongoose.model("Product", productSchema);
 
 module.exports = Product;

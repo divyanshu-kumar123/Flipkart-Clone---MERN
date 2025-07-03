@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/userRoutes.js");
+const productRoutes = require("./routes/productRoutes.js");
 const mongoose = require("mongoose");
 const Order = require('./models/Order.js')
 const dotenv = require("dotenv");
@@ -19,7 +20,7 @@ const port = process.env.PORT || 8080;
 
 // Core Functional Routes
 app.use("/api/users", userRoutes);
-// app.use("/api/products", userRoutes);
+app.use("/api/products", productRoutes);
 // app.use("/api/cart", userRoutes);
 // app.use("/api/orders", userRoutes);
 app.get("/", (req, res) => res.send("API Running"));

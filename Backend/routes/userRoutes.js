@@ -1,5 +1,6 @@
 const express = require("express");
 const WrapAsync = require('../utils/WrapAsync.js')
+const router = express.Router();
 const {
   registerUser,
   loginUser,
@@ -7,7 +8,6 @@ const {
 } = require("../controllers/userController");
 const { isLoggedIn } = require("../middleware/authMiddleware");
 
-const router = express.Router();
 
 router.post("/register", WrapAsync(registerUser));
 router.post("/login", WrapAsync(loginUser));

@@ -15,7 +15,8 @@ a{
     background-color: #2a55e5 !important;
 }
 .profile-btn:hover{
-    background-color: gray !important;
+    background-color: #FAFAFA !important;
+    color: black;
 }
 .login-option-head{
     display: flex;

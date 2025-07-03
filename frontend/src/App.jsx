@@ -5,6 +5,7 @@ import Homepage from "./Pages/Homepage";
 import Navbar from "./Components/Navbar";
 import Loginpage from "./Pages/Loginpage";
 import Signuppage from "./Pages/Signuppage";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
