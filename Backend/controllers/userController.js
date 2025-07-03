@@ -1,13 +1,14 @@
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
+const expressError = require("../utils/expressError.js");
 
 //Register user
 const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
-
+  console.log(req.body);
   const userExists = await User.findOne({ email });
   if (userExists) {
-    return res.status(400).json({ message: "User already exists" });
+    throw new expressError(400, "User already exists");
   }
 
   const user = await User.create({ name, email, password, role });
@@ -21,7 +22,7 @@ const registerUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400).json({ message: "Invalid user data" });
+    throw new expressError(400, "Invalid user data");
   }
 };
 
@@ -39,7 +40,7 @@ const loginUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401).json({ message: "Invalid email or password" });
+    throw new expressError(401, "Invalid email or password");
   }
 };
 

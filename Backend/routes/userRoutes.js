@@ -1,4 +1,5 @@
 const express = require("express");
+const WrapAsync = require('../utils/WrapAsync.js')
 const {
   registerUser,
   loginUser,
@@ -8,8 +9,8 @@ const { isLoggedIn } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
-router.get("/profile", isLoggedIn, getUserProfile);
+router.post("/register", WrapAsync(registerUser));
+router.post("/login", WrapAsync(loginUser));
+router.get("/profile", isLoggedIn, WrapAsync(getUserProfile));
 
 module.exports = router;
