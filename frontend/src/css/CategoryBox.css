@@ -1,0 +1,12 @@
+.category-box{
+    width: 98%;
+    background-color: white;
+    min-height: 130px;
+    align-items: center;
+}
+.category{
+    font-size: 0.9rem;
+}
+.category:hover p{
+    color : #2a55e5;
+}   

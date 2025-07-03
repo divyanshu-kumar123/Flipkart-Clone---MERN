@@ -62,9 +62,9 @@ function LoginBtn() {
           <p><Link to="/" className="pt-1 pb-1"><PermIdentityOutlinedIcon className="pe-2"/> My profile</Link></p>
           <p><Link to="/" className="pt-1 pb-1"><AddCircleOutlineOutlinedIcon className="pe-2"/>Flipkart Plus Zone</Link></p>
           <p><Link to="/" className="pt-1 pb-1"><ViewInArOutlinedIcon className="pe-2"/>Orders</Link></p>
-          <p><Link to="/" className="pt-1 pb-1"><i class="fa-regular fa-heart pe-2"></i>Wishlist</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><i className="fa-regular fa-heart pe-2"></i>Wishlist</Link></p>
           <p><Link to="/" className="pt-1 pb-1"><StarsOutlinedIcon className="pe-2" />Rewards</Link></p>
-          <p><Link to="/" className="pt-1 pb-1"><i class="fa-regular fa-credit-card pe-2"></i>Gift cards</Link></p>
+          <p><Link to="/" className="pt-1 pb-1"><i className="fa-regular fa-credit-card pe-2"></i>Gift cards</Link></p>
 
         </div>
 

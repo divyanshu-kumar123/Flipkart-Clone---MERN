@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
-import api from "../api.js"; // Make sure this points to Axios instance
+import api from "../api.js"; 
 
 function Comp() {
   const navigate = useNavigate();
