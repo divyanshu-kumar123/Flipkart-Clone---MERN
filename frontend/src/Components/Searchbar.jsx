@@ -26,8 +26,8 @@ function Searchbar({ onSearch }) {
         placeholder="Search for products, brands and more"
         sx={{
           m: 1,
-          width: "650px",
-          paddingLeft: "2rem",
+          width: "33.75rem",
+          paddingLeft: "1rem",
         }}
         slotProps={{
           input: {

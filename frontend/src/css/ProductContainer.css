@@ -1,7 +1,7 @@
 .product-container{
     background-color: white;
-    min-width: 1120px;
-    min-height: 90vh;
+    /* min-width: 1120px; */
+    /* min-height: 90vh; */
     display: flex;
     flex-wrap: wrap;
     background-color: rgb(246, 243, 243);
@@ -9,7 +9,7 @@
 .product-card {
     transition: transform 0.2s ease;
     border-radius: 10px;
-    height: 100%;
+    height: fit-content;
     cursor: pointer;
     margin: 5px;
   }
@@ -20,8 +20,9 @@
   }
   
   .product-image {
-    height: 180px;
-    object-fit: contain;
+    height: 300px;
+    object-fit: contain !important;
+    object-position: center;
     padding: 10px;
   }
   

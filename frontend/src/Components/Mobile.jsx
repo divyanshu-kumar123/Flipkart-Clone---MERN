@@ -8,9 +8,10 @@ import ProductContainer from './ProductContainer.jsx';
 function Mobile() {
     const [product, setProduct] = useState([]);
     const [error, setError] = useState("")
+
     useEffect(() => {
           api
-            .get("/products/search?category=mobile")
+            .get("/products/search?category=Mobiles")
             .then((res) => {
               setProduct(res.data);
             })
@@ -24,11 +25,7 @@ function Mobile() {
         <img src={mobileBanner} alt="mobile banner" className='w-100 m-3'/>
         <br />
         <FilterBox />
-        <ProductContainer />
-            {product.map((p, index)=>{
-               return p.title
-            })}
-
+        <ProductContainer product={product} />
     </div>
   )
 }

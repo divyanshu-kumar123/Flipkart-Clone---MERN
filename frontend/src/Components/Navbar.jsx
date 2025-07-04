@@ -51,7 +51,7 @@ function Navbar() {
                   <Searchbar onSearch={handleSearch} />
                 </form>
               </li>
-              <li className="nav-item ps-3 pe-1 d-flex align-items-center">
+              <li className="nav-item ps-2 pe-1 d-flex align-items-center">
                 <div className="nav-link-c">
                   {!isLoggedIn ? (
                     <LoginBtn />
@@ -60,7 +60,7 @@ function Navbar() {
                   )}
                 </div>
               </li>
-              <li className="nav-item ps-1 pe-1 d-flex align-items-center">
+              <li className="nav-item ps-0 pe-1 d-flex align-items-center">
                 <div className="nav-link-c">
                   <Link to="/">
                     <ShoppingCartCheckoutRoundedIcon /> Cart

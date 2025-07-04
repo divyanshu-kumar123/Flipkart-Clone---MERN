@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const CATEGORY_OPTIONS = ["Trending", "grocery", "mobile", "faishon", "electronics", "homeNfurniture", "appliances", "dress", "shoes", "manWears", "womenWear"]; 
+const CATEGORY_OPTIONS = ["Trending", "grocery", "Mobiles", "faishon", "Electronics", "homeNfurniture", "appliances", "dress", "shoes", "manWears", "womenWear"]; 
 
 
 const productSchema = new Schema({

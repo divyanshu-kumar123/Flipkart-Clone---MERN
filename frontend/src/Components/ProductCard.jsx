@@ -5,18 +5,18 @@ import fassured from '../assets/fassured.png'
 
 const ProductCard = ({ product }) => {
   const {
-    id = 1,
+    _id,
     image,
     title,
     price,
-    originalPrice,
     discount,
-    rating,
+    rating = 4.5,
   } = product;
+  let discountedPrice = Math.ceil(price - (price * (discount/100)));
 
   return (
-    <div className="col-md-3 col-sm-6 mb-4">
-      <Link to={`/product/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <div className="col-md-3 col-sm-6 mb-4 card-container">
+      <Link to={`/product/${_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Card className="product-card shadow-sm">
           <CardMedia
             component="img"
@@ -31,12 +31,12 @@ const ProductCard = ({ product }) => {
             <img src={fassured} width='50px'/>
             <div className="d-flex align-items-center gap-2">
               <Typography variant="h6" color="primary">
-                ₹{price}
+                ₹{discountedPrice}
               </Typography>
-              {originalPrice && (
+              {price && (
                 <>
                   <Typography variant="body2" className="text-muted text-decoration-line-through">
-                    ₹{originalPrice}
+                    ₹{price}
                   </Typography>
                   <Typography variant="body2" className="text-success">
                     {discount}% off
