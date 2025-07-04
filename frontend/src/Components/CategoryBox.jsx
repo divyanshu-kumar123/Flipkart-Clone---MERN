@@ -14,13 +14,13 @@ function CategoryBox() {
   return (
     <div className='category-box d-flex m-3 ps-5 pe-5'>
         <Category image={grocery} category={'Grocery'} link='/grocery'/>
-        <Category image={mobile} category={'Mobile'} link='mobile'/>
-        <Category image={fashion} category={'Fashion'} link='faishon'/>
-        <Category image={electronics} category={'Electronics'}/>
-        <Category image={furniture} category={'Home & Furniture'}/>
-        <Category image={appliances} category={'Appliances'}/>
+        <Category image={mobile} category={'Mobile'} link='category/mobiles'/>
+        <Category image={fashion} category={'Fashion'} link='category/fashion'/>
+        <Category image={electronics} category={'Electronics'} link='category/electronics'/>
+        <Category image={furniture} category={'Home & Furniture'} link='category/homeNFurniture'/>
+        <Category image={appliances} category={'Appliances'} link='category/appliance'/>
         <Category image={flight} category={'Flight Booking'}/>
-        <Category image={toys} category={'Beauty toys & more'}/>
+        <Category image={toys} category={'Toys'} link='category/toy'/>
 
     </div>
   )
