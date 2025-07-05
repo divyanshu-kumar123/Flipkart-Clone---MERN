@@ -28,7 +28,6 @@ function Comp() {
         email,
         password,
       });
-
       localStorage.setItem("token", res.data.token);
       navigate("/"); 
     } catch (err) {

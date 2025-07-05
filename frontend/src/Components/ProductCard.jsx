@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="col-md-3 col-sm-6 mb-4 card-container">
-      <Link to={`/product/${_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to={`/products/${_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Card className="product-card shadow-sm">
           <CardMedia
             component="img"

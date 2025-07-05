@@ -1,0 +1,13 @@
+.specific-product{
+    height: 100vh !important;
+    padding: 1rem;
+    background-color: white;
+}
+.image-section{
+    height: 80%;
+    border: 1px solid rgb(224, 223, 223);
+}
+.details-section{
+    height: 100%;
+
+}

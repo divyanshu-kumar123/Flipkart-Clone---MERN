@@ -9,6 +9,7 @@ import Grocery from "./Components/Grocery";
 import CategoryPage from "./Pages/CategoryPage";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import mobileBanner from './assets/mobileBanner.webp'
+import SpecificProductPage from "./Pages/SpecificProductPage";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/category/homeNFurniture" element={<CategoryPage category="homeNFurniture" />} />
           <Route path="/category/appliance" element={<CategoryPage category="appliance" />} />
           <Route path="/category/toy" element={<CategoryPage category="toys" />} />
+          <Route path="/products/:id" element={<SpecificProductPage />} />
  
         </Routes>
       </BrowserRouter>
