@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/Navbar.css";
 import flipkartLogo from "../assets/flipkart-logo.svg";
-import logoBlue from "../assets/logoBlue.png";
+import logoBlue from "../assets/logoBluenew.png";
 import { Link, useLocation } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import ProfileBtn from "./ProfileBtn";
 import api from "../api.js";
 import Alert from "@mui/material/Alert";
+import Badge from "@mui/material/Badge";
 
 function Navbar() {
   const [user, setUser] = useState("");
@@ -58,7 +59,7 @@ function Navbar() {
               <img
                 src={isHome ? flipkartLogo : logoBlue}
                 alt="flipkart"
-                style={{ height: "35px" }}
+                style={{ height: "70px", width:'153px' }}
               />
             </Link>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center flex-row">
@@ -73,9 +74,9 @@ function Navbar() {
                   style={{ color: isHome ? "" : "white" }}
                 >
                   {!isLoggedIn ? (
-                    <LoginBtn />
+                    <LoginBtn isHome={isHome}/>
                   ) : (
-                    <ProfileBtn userName={user.name} />
+                    <ProfileBtn userName={user.name} isHome={isHome}/>
                   )}
                 </div>
               </li>
@@ -85,7 +86,17 @@ function Navbar() {
                   style={{ color: isHome ? "" : "white" }}
                 >
                   <Link to="/" style={{ color: isHome ? "" : "white" }}>
-                    <ShoppingCartCheckoutRoundedIcon /> Cart
+                    <Badge
+                      badgeContent={4}
+                      color={isHome? 'primary' : "secondary"}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <ShoppingCartCheckoutRoundedIcon />
+                    </Badge>
+                    Cart
                   </Link>
                 </div>
               </li>

@@ -11,7 +11,7 @@ import {useAuth} from '../context/AuthContext'
 
 
 
-function ProfileBtn({userName = "Demo"}) {
+function ProfileBtn({userName = "Demo", isHome}) {
 
     const [open, setOpen] = useState(false);
     const {logout} = useAuth();
@@ -27,7 +27,7 @@ function ProfileBtn({userName = "Demo"}) {
       variant={open ? "contained" : "text"}
       size="medium"
       sx={{
-        color: !open && "black",
+         color: isHome ? (open ? "white" : "black") : "white",
         height: "3rem",
         width: "7rem",
         borderRadius: "10px",

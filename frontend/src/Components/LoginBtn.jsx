@@ -9,7 +9,7 @@ import StarsOutlinedIcon from '@mui/icons-material/StarsOutlined';
 
 import {Link} from 'react-router-dom'
 
-function LoginBtn() {
+function LoginBtn({isHome}) {
   const [open, setOpen] = useState(false);
   return (
     <Box
@@ -22,7 +22,7 @@ function LoginBtn() {
         variant={open ? "contained" : "text"}
         size="medium"
         sx={{
-          color: !open && "black",
+          color: isHome ? (open ? "white" : "black") : "white",
           height: "3rem",
           width: "7rem",
           borderRadius: "10px",
