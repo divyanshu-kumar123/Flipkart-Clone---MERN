@@ -4,14 +4,15 @@ import CartPriceCard from "../Components/CartPriceCard";
 import api from "../api";
 import "../css/CartPage.css";
 import EmptyCart from "../Components/EmptyCart";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import { Card, CardContent } from "@mui/material";
 
 function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [refreshCart, setRefreshCart] = useState(false)
+  const [refreshCart, setRefreshCart] = useState(false);
 
   useEffect(() => {
     api
@@ -26,8 +27,15 @@ function CartPage() {
       });
   }, [refreshCart]);
 
-  const handleQuantityChange = (id, newQty) => {
-    
+  const handleQuantityChange = async(id, arg) => {
+    await api
+    .patch(`/cart/${id}/${arg==='decrease'?"decrease":"increase"}`)
+    .then(() => {
+      setRefreshCart((prev) => !prev);
+    })
+    .catch((e) => {
+      setError(e.response?.data?.message || "Error: Unable to remove");
+    });
   };
 
   //to remove any item
@@ -36,12 +44,10 @@ function CartPage() {
       .delete(`/cart/${id}`)
       .then(() => {
         setSuccess("Item removed");
-        setRefreshCart(prev => !prev);
+        setRefreshCart((prev) => !prev);
       })
       .catch((e) => {
-        setError(
-          e.response?.data?.message || "Error: Unable to remove"
-        );
+        setError(e.response?.data?.message || "Error: Unable to remove");
       });
   };
 
@@ -67,7 +73,13 @@ function CartPage() {
       )}
       {cartItems.length > 0 ? (
         <>
-          <div className="col-md-7 ms-3 mt-5 cart-items-scroll">
+          <div className="col-md-7 ms-3 cart-items-scroll">
+            <Card className="d-flex flex-row shadow-sm mb-3 col-md-8 mt-5 justify-content-between w-100">
+              <CardContent>
+              <Typography variant="body1">Deliver to : </Typography>
+              </CardContent>
+              <Button variant="outlined" className="m-2">Change</Button>
+            </Card>
             {cartItems.map((item) => (
               <CartItemCard
                 key={item._id}

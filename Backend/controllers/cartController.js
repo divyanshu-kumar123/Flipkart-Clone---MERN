@@ -63,24 +63,33 @@ const emptyCart = async(req, res)=>{
 }
 
 //Add quantity to the cart by one
-const addQuantity = async (req, res, quantity) => {
+const addQuantity = async (req, res) => {
     const userId = req.user._id;
     const { productId } = req.params;
-  
-    if (!Number.isInteger(quantity) || quantity <= 0) {
-      return res.status(400).json({ message: "Invalid quantity" });
-    }
-  
     const existingItem = await Cart.findOne({ userId, productId });
-  
     if (!existingItem) {
       return res.status(404).json({ message: "Item not found in cart" });
     }
-  
-    existingItem.quantity += quantity;
+    existingItem.quantity += 1;
     await existingItem.save();
     await existingItem.populate("productId");
-  
+    return res.json({
+      message: "Quantity updated",
+      cart: existingItem,
+    });
+  };
+
+  //decrease quantity by 1
+  const decreaseQuantity = async (req, res) => {
+    const userId = req.user._id;
+    const { productId } = req.params;
+    const existingItem = await Cart.findOne({ userId, productId });
+    if (!existingItem || existingItem.quantity <= 0) {
+      return res.status(404).json({ message: "Item not found in cart" });
+    }
+    existingItem.quantity -= 1;
+    await existingItem.save();
+    await existingItem.populate("productId");
     return res.json({
       message: "Quantity updated",
       cart: existingItem,
@@ -89,4 +98,4 @@ const addQuantity = async (req, res, quantity) => {
   
   
 
-module.exports = {getCartItems, addToCart, removeFromCart, emptyCart, addQuantity}
+module.exports = {getCartItems, addToCart, removeFromCart, emptyCart, addQuantity, decreaseQuantity}

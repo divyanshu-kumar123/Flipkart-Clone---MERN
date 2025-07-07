@@ -34,13 +34,13 @@ function CartItemCard({ item, onQuantityChange, onRemove }) {
         <Box className="d-flex align-items-center">
           <IconButton
             size="small"
-            onClick={() => onQuantityChange(item._id, item.quantity - 1)}
+            onClick={() => onQuantityChange(item.productId, 'decrease')}
             disabled={item.quantity <= 1}
           >
             <Remove />
           </IconButton>
           <span className="mx-2">{item.quantity}</span>
-          <IconButton size="small" onClick={() => onQuantityChange(item._id, item.quantity + 1)}>
+          <IconButton size="small" onClick={() => onQuantityChange(item.productId, "increase")}>
             <Add />
           </IconButton>
 
