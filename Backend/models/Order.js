@@ -1,32 +1,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const OrderStatus = ["Placed", "Delivered", "OnWay"];
 
-//Schema for the order
 const orderSchema = new Schema({
-    userId :  {
-            type: Schema.Types.ObjectId,
-            ref : "User"
-        },
-    products : [
-        {
-            type: Schema.Types.ObjectId,
-            ref : "Product"
-        }
-    ],
-    total : { type: Number, default : 0},
-    status : {
-        type: [String],
-        enum: {
-            values: OrderStatus,
-            message: '{VALUE} is not a supported category'
-        },
-        default: ["Placed"]
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  items: [
+    {
+      productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
+      },
+      quantity: Number,
+      price: Number,//price at the time of order
     },
-    date : Date
-})
+  ],
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: 'pending',
+    enum: ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'],
+  },
+}, { timestamps: true });
 
-//Model
-const Listing = new mongoose.model("Order", orderSchema);
-
-module.exports = Listing;
+module.exports = mongoose.model('Order', orderSchema);
