@@ -16,6 +16,7 @@ import Badge from "@mui/material/Badge";
 function Navbar() {
   const [user, setUser] = useState("");
   const [error, setError] = useState("");
+  const [cartCount, setCartCount] = useState(0);
   const { isLoggedIn } = useAuth();
   const location = useLocation();
 
@@ -35,6 +36,20 @@ function Navbar() {
         });
     }
   }, [isLoggedIn]);
+
+  //to get the number of item in cart
+  useEffect(() => {
+    api.get('/cart')
+      .then((res) => {
+        const cart = res.data.cart || [];
+        const total = cart.length;
+        setCartCount(total);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch cart:", err);
+        setCartCount(0);
+      });
+  },[location.pathname, isLoggedIn])
 
   const handleSearch = (query) => {
     console.log("Searching for:", query);
@@ -85,9 +100,9 @@ function Navbar() {
                   className="nav-link-c"
                   style={{ color: isHome ? "" : "white" }}
                 >
-                  <Link to="/" style={{ color: isHome ? "" : "white" }}>
+                  <Link to="/cart" style={{ color: isHome ? "" : "white" }}>
                     <Badge
-                      badgeContent={4}
+                      badgeContent={cartCount}
                       color={isHome? 'primary' : "secondary"}
                       anchorOrigin={{
                         vertical: "top",

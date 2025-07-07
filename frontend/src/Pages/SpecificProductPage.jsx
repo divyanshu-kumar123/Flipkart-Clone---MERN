@@ -7,12 +7,14 @@ import fassured from "../assets/fassured.png";
 import AvailableOffer from "../Components/AvailableOffer";
 import { Typography } from "@mui/material";
 import ProductHighlight from "../Components/ProductHighlight";
+import Alert from "@mui/material/Alert";
 
 function SpecificProductPage() {
   let id = useParams().id;
   const [productDetails, setProductDetails] = useState(null);
   const [error, setError] = useState("");
-  
+  const [success, setSuccess] = useState("");
+
   const [selectedSize, setSelectedSize] = useState(null);
 
   useEffect(() => {
@@ -27,10 +29,60 @@ function SpecificProductPage() {
         setError(message);
       });
   }, [id]);
+  
+  useEffect(() => {
+    if (success) {
+      const timeout = setTimeout(() => setSuccess(""), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [success]);
+  
+  useEffect(() => {
+    if (error) {
+      const timeout = setTimeout(() => setError(""), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [error]);
+
+  //Add to cart
+  const addToCart = async () => {
+    if (!productDetails?._id) return;
+    await api
+      .post("/cart", {
+        productId: productDetails._id,
+        quantity: 1,
+      })
+      .then((res) => {
+        setSuccess(res.data.message);
+      })
+      .catch((e) => {
+        setError(e.response?.data?.message || "Error : While adding item to cart");
+      });
+  };
 
   return (
     <>
-      {productDetails ? (
+      {error && (
+        <Alert
+          className="container border col-md-5 mt-1"
+          severity="error"
+          onClose={() => setError("")}
+        >
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert
+          className="container border col-md-5 mt-1"
+          severity="success"
+          onClose={() => setSuccess("")}
+        >
+          {success}
+        </Alert>
+      )}
+      {productDetails === null ? (
+        <div>Loading...</div>
+      ) : (
         <div className="row specific-product">
           <div className="col-md-5 overflow-auto">
             <div className="image-section d-flex flex-column justify-content-between pb-2">
@@ -39,7 +91,7 @@ function SpecificProductPage() {
               )}
               <div className="row ps-2 pe-2">
                 <div className="col-md-6">
-                  <AddToCartBtn />
+                  <AddToCartBtn onClick={addToCart}/>
                 </div>
                 <div className="col-md-6">
                   <BuyNowButton />
@@ -117,34 +169,32 @@ function SpecificProductPage() {
                     Size &nbsp;
                     {productDetails.properties.size.map((size, index) => (
                       <span
-                      key={index}
-                      onClick={() => setSelectedSize(size)}
-                      className={`border p-2 me-2 text-black rounded cursor-pointer ${
-                        selectedSize === size ? 'border-primary text-primary fw-bold' : ''
-                      }`}
-                      style={{
-                        minWidth: '5rem',
-                        display: 'inline-block',
-                        textAlign: 'center',
-                        borderWidth: '2px',
-                      }}
-                    >
-                      {size}
-                    </span>
+                        key={index}
+                        onClick={() => setSelectedSize(size)}
+                        className={`border p-2 me-2 text-black rounded cursor-pointer ${
+                          selectedSize === size
+                            ? "border-primary text-primary fw-bold"
+                            : ""
+                        }`}
+                        style={{
+                          minWidth: "5rem",
+                          display: "inline-block",
+                          textAlign: "center",
+                          borderWidth: "2px",
+                        }}
+                      >
+                        {size}
+                      </span>
                     ))}
                   </Typography>
-
                 </>
               )}
               <div className="mt-5">
-              <ProductHighlight properties={productDetails.properties} />
-
+                <ProductHighlight properties={productDetails.properties} />
               </div>
             </div>
           </div>
         </div>
-      ) : (
-        "Error occured"
       )}
     </>
   );

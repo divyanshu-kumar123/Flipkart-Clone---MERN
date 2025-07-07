@@ -5,7 +5,7 @@ const expressError = require("../utils/expressError");
 //Get the product from cart
 const getCartItems = async(req, res)=>{
     let userId = req.user._id
-    let items = await Cart.find({ userId }).sort({ createdAt: -1 }).populate("productId");
+    let items = await Cart.find({ userId }).sort({ createdAt: -1 }).populate("productId"); //to get the latest items first
     res.json({
         message : items.length === 0? "Cart is empty" : "Cart item retrieved",
         cart : items
@@ -62,4 +62,31 @@ const emptyCart = async(req, res)=>{
     })
 }
 
-module.exports = {getCartItems, addToCart, removeFromCart, emptyCart}
+//Add quantity to the cart by one
+const addQuantity = async (req, res, quantity) => {
+    const userId = req.user._id;
+    const { productId } = req.params;
+  
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      return res.status(400).json({ message: "Invalid quantity" });
+    }
+  
+    const existingItem = await Cart.findOne({ userId, productId });
+  
+    if (!existingItem) {
+      return res.status(404).json({ message: "Item not found in cart" });
+    }
+  
+    existingItem.quantity += quantity;
+    await existingItem.save();
+    await existingItem.populate("productId");
+  
+    return res.json({
+      message: "Quantity updated",
+      cart: existingItem,
+    });
+  };
+  
+  
+
+module.exports = {getCartItems, addToCart, removeFromCart, emptyCart, addQuantity}
