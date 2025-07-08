@@ -39,7 +39,7 @@ const orderProduct = async (req, res) => {
   res.json({
     message: "Order Placed",
     data: newOrder,
-  }); 
+  });
 };
 
 //Order the item stored in cart
@@ -59,10 +59,13 @@ const orderCart = async (req, res) => {
   for (const item of cartItems) {
     let product = await Product.findById(item.productId);
     if (!product) {
-      throw new expressError(404, `Product with ID ${item.productId} not found`);
+      throw new expressError(
+        404,
+        `Product with ID ${item.productId} not found`
+      );
     }
 
-    // if any product is not in the stock 
+    // if any product is not in the stock
     if (product.stock < item.quantity) {
       throw new expressError(
         400,
@@ -87,7 +90,7 @@ const orderCart = async (req, res) => {
     userId,
     items,
     totalAmount,
-    status: "Confirmed",
+    status: "confirmed",
   });
 
   //clear cart item after placing the order
@@ -99,7 +102,7 @@ const orderCart = async (req, res) => {
       $inc: { stock: -item.quantity },
     });
   }
-  
+
   newOrder = await newOrder.populate("items.productId");
 
   res.json({
@@ -110,7 +113,37 @@ const orderCart = async (req, res) => {
 
 //Cancel Order
 const cancelOrder = async (req, res) => {
-  console.log("Order Cancelled");
+  const userId = req.user._id;
+  const { orderId } = req.params;
+
+  //get the order
+  let order = await Order.findOne({_id : orderId, userId});
+
+  //checking if order exist or the order status is already cancelled
+  if(!order){
+    throw new expressError(404, "Order not found");
+  }
+  if(order.status === "cancelled"){
+    return res.json({message : "Order already cancelled"});
+  }
+
+//update the order status to cancelled
+  order.status = "cancelled";
+  await order.save();
+
+  //to add the orderItem quantity to the stock of the product
+  for(let item of order.items){
+    let updatedProduct = await Product.findByIdAndUpdate(item.productId, {$inc :{stock : item.quantity}}, {new : true});
+    if(!updatedProduct){
+      throw new expressError(404, "No item found in the order")
+    }
+  }
+
+  res.json({
+    message : "Order cancelled",
+    data : order
+  })
+
 };
 
 //Get all the orders
