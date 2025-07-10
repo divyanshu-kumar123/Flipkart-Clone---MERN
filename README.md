@@ -57,9 +57,6 @@ Here are a few screenshots from the project to give you a visual overview:
 - 🔐 **Login and Register Pages**![image](https://github.com/user-attachments/assets/f4ebb7ee-b3cb-4911-8c3a-9c4da87a3454)![image](https://github.com/user-attachments/assets/67fa779a-aed9-498a-acd6-c4969f2c6451)
 
 ---
-Thanks for the clarification! Here's your **final `README.md` setup instructions** tailored exactly for your folder structure (`backend` & `frontend`) and your custom start commands (`node` for backend, `npm run dev` for frontend):
-
----
 
 ## 🛠️ Getting Started
 
