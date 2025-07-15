@@ -25,7 +25,7 @@ const orderSchema = new Schema({
   status: {
     type: String,
     default: 'pending',
-    enum: ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'],
+    enum: ['pending', 'placed', 'shipped', 'delivered', 'cancelled'],
   },
 }, { timestamps: true });
 

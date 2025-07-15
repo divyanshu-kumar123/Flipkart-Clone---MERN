@@ -79,7 +79,7 @@ function OrderPage() {
       }
   
       setSuccess("Order placed successfully");
-      navigate("/");
+      navigate("/orders");
     } catch (error) {
       console.error("Order placement failed:", error);
       setError(error.response?.data?.message || "Failed to place the order. Please try again.");

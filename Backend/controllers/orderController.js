@@ -29,7 +29,7 @@ const orderProduct = async (req, res) => {
       },
     ],
     totalAmount,
-    status: "confirmed",
+    status: "placed",
   });
   //decrease stock
   await Product.findByIdAndUpdate(productId, {
@@ -89,7 +89,7 @@ const orderCart = async (req, res) => {
     userId,
     items,
     totalAmount,
-    status: "confirmed",
+    status: "placed",
   });
 
   //clear cart item after placing the order
