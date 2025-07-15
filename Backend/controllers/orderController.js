@@ -29,7 +29,7 @@ const orderProduct = async (req, res) => {
       },
     ],
     totalAmount,
-    status: "Confirmed",
+    status: "confirmed",
   });
   //decrease stock
   await Product.findByIdAndUpdate(productId, {
@@ -45,7 +45,6 @@ const orderProduct = async (req, res) => {
 //Order the item stored in cart
 const orderCart = async (req, res) => {
   const userId = req.user._id;
-
   //get the items of cart
   let cartItems = await Cart.find({ userId });
   if (cartItems.length === 0) {

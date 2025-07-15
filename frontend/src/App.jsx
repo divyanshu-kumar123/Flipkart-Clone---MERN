@@ -11,6 +11,7 @@ import CategoryPage from "./Pages/CategoryPage";
 import mobileBanner from './assets/mobileBanner.webp'
 import SpecificProductPage from "./Pages/SpecificProductPage";
 import CartPage from "./Pages/CartPage";
+import OrderPage from "./Pages/OrderPage";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/signup" element={<Signuppage />} />
           <Route path="/grocery" element={<Grocery />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/order" element={<OrderPage />} />
           <Route path="/category/mobiles" element={<CategoryPage category="mobile" banner={mobileBanner} />} />
           <Route path="/category/fashion" element={<CategoryPage category="fashion" />} />
           <Route path="/category/electronics" element={<CategoryPage category="electronics" />} />

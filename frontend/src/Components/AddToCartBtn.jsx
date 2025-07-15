@@ -13,15 +13,14 @@ export function AddToCartBtn({ onClick }) {
   );
 }
 
-export function BuyNowButton({ link = "/" }) {
+export function BuyNowButton({ onClick }) {
   return (
-    <Link to={link}>
       <Button
         sx={{ width: "100%", backgroundColor: "#FB641B", height: "3rem" }}
         variant="contained"
+        onClick={onClick}
       >
         Buy Now &nbsp;<i className="fa-solid fa-bolt"></i>
       </Button>
-    </Link>
   );
 }

@@ -8,14 +8,16 @@ import AvailableOffer from "../Components/AvailableOffer";
 import { Typography } from "@mui/material";
 import ProductHighlight from "../Components/ProductHighlight";
 import Alert from "@mui/material/Alert";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function SpecificProductPage() {
   let id = useParams().id;
   const [productDetails, setProductDetails] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const location = useLocation();
   const [selectedSize, setSelectedSize] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api
@@ -29,14 +31,14 @@ function SpecificProductPage() {
         setError(message);
       });
   }, [id]);
-  
+
   useEffect(() => {
     if (success) {
       const timeout = setTimeout(() => setSuccess(""), 3000);
       return () => clearTimeout(timeout);
     }
   }, [success]);
-  
+
   useEffect(() => {
     if (error) {
       const timeout = setTimeout(() => setError(""), 3000);
@@ -56,8 +58,31 @@ function SpecificProductPage() {
         setSuccess(res.data.message);
       })
       .catch((e) => {
-        setError(e.response?.data?.message || "Error : While adding item to cart");
+        setError(
+          e.response?.data?.message || "Error : While adding item to cart"
+        );
       });
+  };
+
+  // place order - on clicking the place order button
+  const placeOrder = () => {
+    const product = [{
+      _id: productDetails._id,
+      title: productDetails.title,
+      price: productDetails.price,
+      discount: productDetails.discount,
+      description: productDetails.description,
+      image: productDetails.image,
+      quantity: 1,
+      productId: productDetails._id,
+    }];
+    const order = {
+      from : "Product",
+      items: product,
+      location: "Delhi, India",
+    };
+
+    navigate("/order", { state: { order } });
   };
 
   return (
@@ -91,10 +116,10 @@ function SpecificProductPage() {
               )}
               <div className="row ps-2 pe-2">
                 <div className="col-md-6">
-                  <AddToCartBtn onClick={addToCart}/>
+                  <AddToCartBtn onClick={addToCart} />
                 </div>
                 <div className="col-md-6">
-                  <BuyNowButton />
+                  <BuyNowButton onClick={placeOrder} />
                 </div>
               </div>
             </div>
